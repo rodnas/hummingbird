@@ -3,9 +3,17 @@ $params["base_url"] = "https://api.hbtserver.net/v1/";
 
 function curlHummingCurl($params) {
 	$hummingridCurlActionArray = Array();
+	$hummingridCurlActionArray["postPriceSearch"]="postPriceSearch"; 
+	$hummingridCurlActionArray["getPriceSearchListingResponseToken"]="getPriceSearchListingResponseToken"; 
+	$hummingridCurlActionArray["getPriceHotelHotelCodeDealsResponseToken"]="getPriceHotelHotelCodeDealsResponseToken"; 
+
 	$hummingridCurlActionArray["getPropertiesDestinationCode"]="getPropertiesDestinationCode"; 
 	$hummingridCurlActionArray["getPropertiesDestinationCodeHotelCode"]="getPropertiesDestinationCodeHotelCode"; 
-	$hummingridCurlActionArray["putBookingHotelCreateResponseToken"]="putBookingHotelCreateResponseToken"; 
+
+	$hummingridCurlActionArray["postBookingHotelCreateResponseToken"]="postBookingHotelCreateResponseToken"; 
+	$hummingridCurlActionArray["postBookingBookingIdGuestDetails"]="postBookingBookingIdGuestDetails"; 
+	$hummingridCurlActionArray["getBookingBookingResponseToken"]="getBookingBookingResponseToken"; 
+	$hummingridCurlActionArray["postBookingBookingResponseTokenCancelRequest"]="postBookingBookingResponseTokenCancelRequest"; 
 
 
 	// Acttions possibilities
@@ -15,32 +23,37 @@ function curlHummingCurl($params) {
 		$curl_params["curl_function"] = $params["curl_function"];
 		switch ($params["curl_function"])
 			{
+			case "postPriceSearch":
+				include "postpricesearch.php";
+				break;
+			case "getPriceSearchListingResponseToken":
+				include "getpricesearchlistingresponsetoken.php";
+				break;
+			case "getPriceHotelHotelCodeDealsResponseToken":
+				include "getpricehotelhotelcodedealsresponsetoken.php";
+				break;
+			case "getPriceSearchListingResponseToken":
+				include "getpricesearchlistingresponsetoken.php";
+				break;
 			case "getPropertiesDestinationCode":
-				$params["destinationCode"] = "MV";
-				$curl_params["test_api_url"] = $params["base_url"]."properties/".$params["destinationCode"];
-				$resource_array = getCurl($curl_params);
+				include "getpropertiesdestinationcode.php";
 				break;
 			case "getPropertiesDestinationCodeHotelCode":
-				$params["destinationCode"] = "MV";
-				$params["hotelCode"] = "h5cc6bdd77a6f9";
-				$curl_params["test_api_url"] = $params["base_url"]."properties/".$params["destinationCode"]."/".$params["hotelCode"];
-				$resource_array = getCurl($curl_params);
+				include "getpropertiesdestinationcodehotelcode.php";
 				break;
-			case "putBookingHotelCreateResponseToken":
-				$params["hotelCode"] = "h5cc6bdd77a6f9";
-				$params["responseToken"] = "c4e90180-ebb0-4392-8026-62d80e39ecef";
-				$curl_params["test_api_url"] = $params["base_url"]."booking/".$params["hotelCode"]."/create/".$params["responseToken"];
-				$data = array(
-					"bookingRequest" => array(
-						"primaryGuestName" => "John Doe",
-						"groups" => array(
-							"id" =>"group-1",
-						        "room" => "DBV",
-						        "deal"=> "05e15b0cfd4c4d"
-						)
-					));
-				$resource_array = putCurl($curl_params, $data);
+			case "postBookingHotelCreateResponseToken":
+				include "postbookinghotelcreateresponsetoken.php";
 				break;
+			case "postBookingBookingIdGuestDetails":
+				include "postbookingbookingidguestdetails.php";
+				break;
+			case "getBookingBookingResponseToken":
+				include "postbookingbookingresponsetoken.php";
+				break;
+			case "postBookingBookingResponseTokenCancelRequest":
+				include "postbookingbookingresponsetokenbancelrequest.php";
+				break;
+
 			default:
 				$resource_array[] = "Error Function";
 				$resource_array[] = $params["test_api_url"];
@@ -99,7 +112,7 @@ function getCurl($curl_params) {
 	return array(json_decode($response, true), $curl_params["test_api_url"], $curl_params, $status_code);
 }
 
-function putCurl($curl_params, $data) {
+function postCurl($curl_params, $data) {
 	$json_content = json_encode($data);
 	$header = [
 		'Authorization: Bearer '.$curl_params["access_token"],
@@ -122,7 +135,7 @@ function putCurl($curl_params, $data) {
 	$status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
 	curl_close($curl);
 
-	return array(json_decode($response, true), $curl_params["test_api_url"], $curl_params, $status_code);
+	return array(json_decode($response, true), $curl_params["test_api_url"], $curl_params, $json_content, $status_code);
 }
 
 

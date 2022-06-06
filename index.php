@@ -18,19 +18,63 @@ echo "**************************************************************************
 
 $params["access_token"] = $access_token;
 
+/*
+$params["curl_function"]="postPriceSearch";
+$resource = curlHummingCurl($params); 
+var_dump($resource);
+$content = $resource;
+echo "****************************************************************************************************<br>";
+*/
+/*
+$params["curl_function"]="getPriceSearchListingResponseToken";
+$resource = curlHummingCurl($params); 
+var_dump($resource);
+$content = $resource;
+echo "****************************************************************************************************<br>";
+*/
+/*
+$params["curl_function"]="getPriceHotelHotelCodeDealsResponseToken";
+$resource = curlHummingCurl($params); 
+var_dump($resource);
+$content = $resource;
+echo "****************************************************************************************************<br>";
+*/
+/*
 $params["curl_function"]="getPropertiesDestinationCode";
 $resource = curlHummingCurl($params); 
 var_dump($resource);
 echo "****************************************************************************************************<br>";
-
+*/
+/*
 $params["curl_function"]="getPropertiesDestinationCodeHotelCode";
 $resource = curlHummingCurl($params); 
 var_dump($resource);
 $content = $resource;
 echo "****************************************************************************************************<br>";
+*/
+/*
+$params["curl_function"]="postBookingHotelCreateResponseToken";
+$resource = curlHummingCurl($params); 
+var_dump($resource);
+$content = $resource;
+echo "****************************************************************************************************<br>";
+*/
+/*
+$params["curl_function"]="postBookingBookingIdGuestDetails";
+$resource = curlHummingCurl($params); 
+var_dump($resource);
+$content = $resource;
+echo "****************************************************************************************************<br>";
+*/
+/*
+$params["curl_function"]="getBookingBookingResponseToken";
+$resource = curlHummingCurl($params); 
+var_dump($resource);
+$content = $resource;
+echo "****************************************************************************************************<br>";
+*/
 
-
-$params["curl_function"]="putBookingHotelCreateResponseToken";
+$params["curl_function"]="postBookingBookingResponseTokenCancelRequest";
 $resource = curlHummingCurl($params); 
 var_dump($resource);
 $content = $resource;
