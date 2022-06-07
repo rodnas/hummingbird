@@ -48,7 +48,7 @@ function curlHummingCurl($params) {
 				include "postbookingbookingidguestdetails.php";
 				break;
 			case "getBookingBookingResponseToken":
-				include "postbookingbookingresponsetoken.php";
+				include "getbookingbookingresponsetoken.php";
 				break;
 			case "postBookingBookingResponseTokenCancelRequest":
 				include "postbookingbookingresponsetokenbancelrequest.php";
