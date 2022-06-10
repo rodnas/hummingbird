@@ -116,21 +116,19 @@ function postCurl($curl_params, $data) {
 	$json_content = json_encode($data);
 	$header = [
 		'Authorization: Bearer '.$curl_params["access_token"],
-		'accept: application/json',
-		'Content-Length: ' . strlen($json_content)
+		'accept: application/json'
+//		'Content-Length: ' . strlen($json_content)
 	];
 
 	$curl = curl_init();
-	curl_setopt_array($curl, array(
-		CURLOPT_URL => $curl_params["test_api_url"],
-		CURLOPT_HTTPHEADER => $header,
-		CURLOPT_SSL_VERIFYPEER => false,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLINFO_HEADER_OUT => true,
-		CURLOPT_POST => true,
-		CURLOPT_POSTFIELDS => $json_content
+	curl_setopt($curl, CURLOPT_URL, $curl_params["test_api_url"]);
+	curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+	//curl_setopt($curl, CURLINFO_HEADER_OUT, true);			// if need
+	curl_setopt($curl, CURLOPT_POST, true);
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $json_content);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);		// if need
 
-	));
 	$response = curl_exec($curl);
 	$status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
 	curl_close($curl);
@@ -138,5 +136,53 @@ function postCurl($curl_params, $data) {
 	return array(json_decode($response, true), $curl_params["test_api_url"], $curl_params, $json_content, $status_code);
 }
 
+function putCurl($curl_params, $data) {
+	$json_content = json_encode($data);
+	$header = [
+		'Authorization: Bearer '.$curl_params["access_token"],
+		'accept: application/json',
+		'Content-Length: ' . strlen($json_content)
+	];
+
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $curl_params["test_api_url"]);
+	curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $json_content);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);		// if need
+	//curl_setopt($curl, CURLINFO_HEADER_OUT, true); 			// if need
+
+	$response = curl_exec($curl);
+	$status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+	curl_close($curl);
+
+	return array(json_decode($response, true), $curl_params["test_api_url"], $curl_params, $json_content, $status_code);
+}
+
+function deleteCurl($curl_params, $data) {
+	$json_content = json_encode($data);
+	/*	if need
+	$header = [
+		'Authorization: Bearer '.$curl_params["access_token"],
+		'accept: application/json',
+		'Content-Length: ' . strlen($json_content)
+	];
+	*/
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $curl_params["test_api_url"]);
+	//curl_setopt($curl, CURLOPT_HTTPHEADER, $header);			// if need
+	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $json_content);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);		// if need
+	//curl_setopt($curl, CURLINFO_HEADER_OUT, true); 			// if need
+
+	$response = curl_exec($curl);
+	$status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+	curl_close($curl);
+
+	return array(json_decode($response, true), $curl_params["test_api_url"], $curl_params, $json_content, $status_code);
+}
 
 ?>
