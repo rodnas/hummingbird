@@ -1,4 +1,10 @@
 <?php
+$token_params["token_url"] = "https://api.hbtserver.net/oauth/token";
+
+$token_params["client_id"] = "8adc3dd6-f9ae-4792-a2e4-f4d246ad3237";
+$token_params["client_secret"] = "RWKDyOq5dKH5gv78Mdg3PoIjhXemwkPIlatYoQPL";
+
+$params["test_api_url"]  = "https://api.hbtserver.net/v1/";
 $params["base_url"] = "https://api.hbtserver.net/v1/";
 
 function curlHummingCurl($params) {
